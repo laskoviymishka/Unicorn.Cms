@@ -7,7 +7,6 @@ using Microsoft.AspNet.Authorization;
 
 namespace Unicorn.Cms.Controllers
 {
-	[Authorize]
 	public class HomeController : Controller
 	{
 		public IActionResult Index()
