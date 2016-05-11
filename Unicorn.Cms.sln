@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A36F384F-FA68-4CA0-AAD5-E8FD6CFBA821}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12C55414-B3D0-4055-B494-985FE61046C6}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Unicorn.Cms", "src\Unicorn.Cms\Unicorn.Cms.xproj", "{F428CC61-F764-4027-BE67-866D78080EA6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F428CC61-F764-4027-BE67-866D78080EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F428CC61-F764-4027-BE67-866D78080EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F428CC61-F764-4027-BE67-866D78080EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F428CC61-F764-4027-BE67-866D78080EA6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F428CC61-F764-4027-BE67-866D78080EA6} = {A36F384F-FA68-4CA0-AAD5-E8FD6CFBA821}
+	EndGlobalSection
+EndGlobal
