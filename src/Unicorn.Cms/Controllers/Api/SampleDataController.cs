@@ -7,7 +7,6 @@ using Microsoft.AspNet.Authorization;
 
 namespace Unicorn.Cms.Controllers
 {
-	[Authorize]
 	[Route("api/[controller]")]
 	public class SampleDataController : Controller
 	{

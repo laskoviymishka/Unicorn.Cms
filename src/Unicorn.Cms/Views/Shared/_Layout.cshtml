@@ -5,40 +5,29 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>@ViewData["Title"] - Unicorn.Cms</title>
 	<base href="/" />
-	<environment names="Development">
-		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-		<link rel="stylesheet" href="~/css/site.css" />
-	</environment>
-	<environment names="Staging,Production">
-		<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
-			  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-			  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-		<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-	</environment>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+	<!-- Material Design for Bootstrap -->
+	<link rel="stylesheet" href="https://cdn.rawgit.com/FezVrasta/bootstrap-material-design/dist/dist/bootstrap-material-design.min.css">
+	<link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a asp-controller="Home" asp-action="Index" class="navbar-brand">Unicorn.Cms</a>
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li><a asp-controller="Home" asp-action="Index">Home</a></li>
-					<li><a asp-controller="Home" asp-action="About">About</a></li>
-					<li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
-				</ul>
-				@await Html.PartialAsync("_LoginPartial")
-			</div>
+	<nav class="navbar navbar-light bg-faded">
+		<button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#toggle" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">
+			&#9776;
+		</button>
+		<div class="collapse navbar-toggleable-xs" id="toggle" style="width:100%">
+			<a class="navbar-brand" href="#">Navbar</a>
+			<ul class="nav navbar-nav">
+				<li class="nav-item active"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+				<li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">About</a></li>
+				<li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a></li>
+			</ul>
+			@await Html.PartialAsync("_LoginPartial")
 		</div>
-	</div>
-	<div class="container body-content">
+	</nav>
+	<div class="container-flex body-content">
 		@RenderBody()
 		<hr />
 		<footer>
