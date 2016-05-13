@@ -56,7 +56,7 @@
       "bower install",
       "gulp clean",
       "gulp min",
-      "webpack"
+      "webpack -prod"
     ]
   }
 }
