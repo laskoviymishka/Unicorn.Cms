@@ -8,29 +8,30 @@ var prodConfig = require('./webpack.config.prod');
 var isDevelopment = process.env.ASPNET_ENV === 'Development';
 
 module.exports = merge({
-    resolve: {
-        extensions: [ '', '.js', '.ts' ]
-    },
-    module: {
-        loaders: [
-            { test: /\.ts$/, include: /app/, loader: 'ts-loader' },
-            { test: /\.html$/, loader: 'raw-loader' },
-            { test: /\.css/, loader: extractCSS.extract(['css']) }
-        ]
-    },
-    entry: {
-        main: ['./app/boot-client.ts']
-    },
-    output: {
-        path: path.join(__dirname, 'wwwroot', 'dist'),
-        filename: '[name].js',
-        publicPath: '/dist/'
-    },
-    plugins: [
-        extractCSS,
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: require('./wwwroot/dist/vendor-manifest.json')
-        })
+  resolve: {
+    extensions: ['', '.js', '.ts']
+  },
+  module: {
+    loaders: [
+        { test: /\.ts$/, include: /app/, loader: 'ts-loader' },
+        { test: /\.html$/, loader: 'raw-loader' },
+        { test: /\.css/, loader: extractCSS.extract(['css']) }
     ]
+  },
+  entry: {
+    main: ['./app/boot-client.ts'],
+    admin: ['webpack-hot-middleware/client', './app/admin-client.ts']
+  },
+  output: {
+    path: path.join(__dirname, 'wwwroot', 'dist'),
+    filename: '[name].js',
+    publicPath: '/dist/'
+  },
+  plugins: [
+      extractCSS,
+      new webpack.DllReferencePlugin({
+        context: __dirname,
+        manifest: require('./wwwroot/dist/vendor-manifest.json')
+      })
+  ]
 }, isDevelopment ? devConfig : prodConfig);
