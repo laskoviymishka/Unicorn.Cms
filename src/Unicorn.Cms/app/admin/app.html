@@ -1,13 +1,20 @@
 <div class="container-fluid">
 	<div class="row">
-		<ul class="col-md-3">
-			<li linkActive="active">
-				<a [linkTo]="'categories'">Category</a>
-			</li>
-		</ul>
+		<div class="col-md-3">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="nav-item">
+					<a class="nav-link" [linkTo]="'categories'" linkActive="active">Category</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" [linkTo]="'posts'" linkActive="active">Posts</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" [linkTo]="'users'" linkActive="active">Users</a>
+				</li>
+			</ul>
+		</div>
 		<div class="col-md-9">
 			<h1>Secured admin component</h1>
-
 			<route-view></route-view>
 		</div>
 	</div>
