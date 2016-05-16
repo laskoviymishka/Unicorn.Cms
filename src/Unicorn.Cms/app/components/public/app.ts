@@ -1,10 +1,10 @@
 import * as ng from '@angular/core';
 import * as router from '@angular/router-deprecated';
 import { Http, HTTP_BINDINGS } from '@angular/http';
-import { NavMenu } from '../nav-menu/nav-menu';
-import { Home } from '../home/home';
-import { FetchData } from '../fetch-data/fetch-data';
-import { Counter } from '../counter/counter';
+import { NavMenu } from './nav-menu/nav-menu';
+import { Home } from './home/home';
+import { FetchData } from './fetch-data/fetch-data';
+import { Counter } from './counter/counter';
 
 @ng.Component({
     selector: 'app',

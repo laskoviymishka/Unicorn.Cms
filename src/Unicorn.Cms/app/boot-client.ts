@@ -8,7 +8,7 @@ import { bootstrap } from '@angular/platform-browser-dynamic';
 import { FormBuilder } from '@angular/common';
 import * as router from '@angular/router-deprecated';
 import { Http, HTTP_PROVIDERS } from '@angular/http';
-import { App } from './components/app/app';
+import { App } from './components/public/app';
 
 bootstrap(App, [router.ROUTER_PROVIDERS, HTTP_PROVIDERS, FormBuilder]);
 

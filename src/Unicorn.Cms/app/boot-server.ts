@@ -4,7 +4,7 @@ import * as ngRouter from '@angular/router-deprecated';
 import * as ngUniversal from 'angular2-universal';
 import * as aspnet from 'aspnet-prerendering';
 import { BASE_URL, ORIGIN_URL, REQUEST_URL } from 'angular2-universal/common';
-import { App } from './components/app/app';
+import { App } from './components/public/app';
 
 export default function (params: aspnet.BootFuncParams): Promise<{ html: string, globals?: any }> {
   const serverBindings = [
