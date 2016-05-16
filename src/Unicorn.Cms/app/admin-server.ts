@@ -4,7 +4,8 @@ import * as ngRouter from '@angular/router-deprecated';
 import * as ngUniversal from 'angular2-universal';
 import * as aspnet from 'aspnet-prerendering';
 import { BASE_URL, ORIGIN_URL, REQUEST_URL } from 'angular2-universal/common';
-import { App } from './components/admin/app';
+import { App, routes } from './components/admin/app';
+import { provideRouter } from '@ngrx/router';
 
 export default function (params: aspnet.BootFuncParams): Promise<{ html: string, globals?: any }> {
   const serverBindings = [
@@ -14,6 +15,7 @@ export default function (params: aspnet.BootFuncParams): Promise<{ html: string,
     ...ngUniversal.NODE_PLATFORM_PIPES,
     ...ngUniversal.NODE_ROUTER_PROVIDERS,
     ...ngUniversal.NODE_HTTP_PROVIDERS,
+    ...provideRouter(routes)
   ];
 
   let boot = ngUniversal.bootloader({
