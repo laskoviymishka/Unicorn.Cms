@@ -1,14 +1,14 @@
 import 'bootstrap';
 require('zone.js');
 import 'reflect-metadata';
-import './styles/site.css';
+import '../styles/site.css';
 
 import { provideRouter } from '@ngrx/router';
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { FormBuilder } from '@angular/common';
 import * as router from '@angular/router-deprecated';
 import { Http, HTTP_PROVIDERS } from '@angular/http';
-import { App, routes } from './components/admin/app';
+import { App, routes } from './app';
 
 bootstrap(App, [
   router.ROUTER_PROVIDERS,

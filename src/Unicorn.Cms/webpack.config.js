@@ -19,8 +19,8 @@ module.exports = merge({
     ]
   },
   entry: {
-    main: ['./app/boot-client.ts'],
-    admin: ['webpack-hot-middleware/client', './app/admin-client.ts']
+    main: ['./app/public/boot-client.ts'],
+    admin: ['webpack-hot-middleware/client', './app/admin/boot-client.ts']
   },
   output: {
     path: path.join(__dirname, 'wwwroot', 'dist'),
