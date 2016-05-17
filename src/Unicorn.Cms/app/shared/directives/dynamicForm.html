@@ -1,0 +1,7 @@
+<div class="container-fluid">
+	<span>Control</span>
+</div>
+<div *ngFor="let key of metaKeys">
+	<field [field]="meta.get(key)" [model]="model"></field>
+</div>
+<button class="btn btn-success">Save</button>

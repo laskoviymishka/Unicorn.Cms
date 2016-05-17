@@ -106,10 +106,15 @@ namespace Unicorn.Cms
 					name: "default",
 					template: "{controller=Home}/{action=Index}/{id?}");
 
-				routes.MapSpaFallbackRoute(
-					name: "spa-fallback",
-					defaults: new { controller = "Home", action = "Index" });
-			});
+                routes.MapSpaFallbackRoute(
+                    name: "admin-spa-fallback",
+                    templatePrefix: "Home/Admin",
+                    defaults: new { controller = "Home", action = "Admin" });
+
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Home", action = "Index" });
+            });
 		}
 
 		// Entry point for the application.

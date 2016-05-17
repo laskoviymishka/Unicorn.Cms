@@ -5,8 +5,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var extractCSS = new ExtractTextPlugin('styles.css');
 var devConfig = require('./webpack.config.dev');
 var prodConfig = require('./webpack.config.prod');
-var isDevelopment = process.env.ASPNET_ENV === 'Development';
-
+var isDevelopment = process.env.ASPNET_ENV === 'Development' || true;
+console.log(process.env.ASPNET_ENV)
 module.exports = merge({
   resolve: {
     extensions: ['', '.js', '.ts']

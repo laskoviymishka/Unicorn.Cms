@@ -1,6 +1,7 @@
 import * as ng from '@angular/core';
 import { Http, HTTP_BINDINGS } from '@angular/http';
-import { Category } from './category/category';
+import { Category } from './category';
+import { NewCategory } from './category/newCategory';
 import { Post } from './post/post';
 import { User } from './user/user';
 import { Routes } from '@ngrx/router';
@@ -12,7 +13,13 @@ export const routes: Routes = [
   },
   {
     path: '/categories',
-    component: Category
+    component: Category,
+    children: [
+      {
+        path: 'new',
+        component: NewCategory
+      }
+    ]
   },
   {
     path: '/users',

@@ -1,0 +1,8 @@
+<div [ngSwitch]="field?.type">
+	<div *ngSwitchWhen="'Text'">
+		<text-field></text-field>
+	</div>
+	<div *ngSwitchWhen="'Dropdown'">
+		<dropdown-field></dropdown-field>
+	</div>
+</div>

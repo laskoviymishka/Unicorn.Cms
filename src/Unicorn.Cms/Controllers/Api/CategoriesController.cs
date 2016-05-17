@@ -5,6 +5,8 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
 using Unicorn.Cms.Models;
 using Unicorn.Cms.Models.Domain;
+using Microsoft.Data.Entity.Metadata;
+using Microsoft.Data.Entity.Infrastructure;
 
 namespace Unicorn.Cms.Controllers
 {
@@ -18,10 +20,16 @@ namespace Unicorn.Cms.Controllers
         {
             _context = context;
         }
+        [HttpGet("_meta")]
+        public IActionResult GetCategories()
+        {
+            return Ok(_context.Model.GetEntityTypes().Select(t => t.GetProperties().Select(p => p.FindContainingKeys())));
+        }
+
 
         // GET: api/Categories
         [HttpGet]
-        public IEnumerable<Category> GetCategories()
+        public IEnumerable<Category> GetCategoriesMeta()
         {
             return _context.Categories;
         }
