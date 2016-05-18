@@ -2,6 +2,6 @@
 	<span>Control</span>
 </div>
 <div *ngFor="let key of metaKeys">
-	<field [field]="meta.get(key)" [model]="model"></field>
+	<field [field]="meta.get(key)" [model]="model" [control]="formConfig[key]"></field>
 </div>
 <button class="btn btn-success">Save</button>

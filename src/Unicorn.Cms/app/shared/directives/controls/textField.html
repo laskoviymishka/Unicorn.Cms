@@ -1,1 +1,9 @@
-<p> text field</p>
+<div class="form-group" [ngClass]="{'has-success': control.dirty && control.valid, 'has-danger': control.dirty && !control.valid}">
+	<label [attr.for]="field.label" class="mdb-label-floating">{{field.label}}</label>
+	<input [type]="field.type"
+		   [id]="field.label"
+		   [ngFormControl]="control"
+		   class="form-control"
+		   [ngClass]="{'form-control-success': control.dirty && control.valid, 'form-control-danger': control.dirty && !control.valid}">
+	<div *ngIf="control.dirty && control.hasError('required')">Required</div>
+</div>
