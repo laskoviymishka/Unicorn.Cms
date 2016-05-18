@@ -1,7 +1,9 @@
 ﻿import * as decorators from './decorators';
 import * as common from '@angular/common';
 
-@decorators.connected
+@decorators.connected({
+  apiUrl: 'api/categories'
+})
 export class Category {
   private _name: string;
   private _parentId: number;

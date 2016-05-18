@@ -1,6 +1,6 @@
 import * as ng from '@angular/core';
 import { getMeta, IMetadata } from '../../domain';
-import { BmdBootDirective } from '../BmdBootDirective';
+import { BmdBootDirective } from '../../directives/BmdBootDirective';
 import { BaseField } from './baseField';
 
 @ng.Component({

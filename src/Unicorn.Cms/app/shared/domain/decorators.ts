@@ -1,35 +1,38 @@
 ﻿import * as common from '@angular/common';
 import { ValidatorFn } from '@angular/common/src/forms/directives/validators';
 
-export const META_KEY = '__meta__';
+export const METADATA = '__FORMS_METADATA__';
+export const CONNECTED_INFO = '__CONNECTED_INFO__';
 
-export function connected<TFunction extends Function>(target: TFunction): TFunction {
-  console.log('connected', target);
-  return target;
+export interface ConnectedOption {
+  apiUrl: string;
+}
+
+export const connected = (options: ConnectedOption) => {
+  return <TFunction extends Function>(target: TFunction): TFunction => {
+    addMeta(target.prototype, CONNECTED_INFO, 'options', options);
+    return target;
+  }
 }
 
 export function key(target: any, key: string) {
-  console.log(target, key, 'key', target);
   addMeta(target, key, 'key', true);
 };
 
 export const foreignKey = (targetType: Function) => {
   return (target: Object, propertyKey: string | symbol): void => {
-    console.log(target, propertyKey, 'foreignKey', targetType);
-    addMeta(target, propertyKey, 'foreignKey', targetType);
+    addMeta(targetType, propertyKey, 'foreignKey', targetType);
   };
 };
 
 export const validators = (validators: ValidatorFn) => {
   return (target: Object, propertyKey: string | symbol): void => {
-    console.log(target, propertyKey, 'validators', validators);
     addMeta(target, propertyKey, 'validators', validators);
   };
 }
 
 export const label = (label: string) => {
   return (target: Object, propertyKey: string | symbol): void => {
-    console.log(target, propertyKey, 'label', label);
     addMeta(target, propertyKey, 'label', label);
   };
 };
@@ -37,22 +40,21 @@ export const label = (label: string) => {
 type EditorType = "Text" | "Number" | "Date" | "Markdown" | "Dropdown";
 export const type = (editorType: EditorType) => {
   return (target: Object, propertyKey: string | symbol): void => {
-    console.log(target, propertyKey, 'type', editorType);
     addMeta(target, propertyKey, 'type', editorType);
   };
 };
 
 export function addMeta(target: any, propertyKey: string | symbol, metaKey: string, metaValue: any): void {
   if (target) {
-    if (!target[META_KEY]) {
-      target[META_KEY] = [];
+    if (!target[METADATA]) {
+      target[METADATA] = [];
     }
 
-    if (!target[META_KEY][propertyKey]) {
-      target[META_KEY][propertyKey] = {};
+    if (!target[METADATA][propertyKey]) {
+      target[METADATA][propertyKey] = {};
     }
 
-    target[META_KEY][propertyKey][metaKey] = metaValue;
+    target[METADATA][propertyKey][metaKey] = metaValue;
   }
 }
 
@@ -65,9 +67,10 @@ export interface IMetadata {
 }
 
 export const getMeta = (target: Object): Map<string, IMetadata> => {
+  console.log(target);
   let meta = new Map<string, IMetadata>();
-  for (var key in target[META_KEY]) {
-    meta.set(key, target[META_KEY][key]);
+  for (var key in target[METADATA]) {
+    meta.set(key, target[METADATA][key]);
   }
   return meta;
 };

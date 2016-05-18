@@ -1,6 +1,3 @@
-<div class="container-fluid">
-	<span>Control</span>
-</div>
 <div *ngFor="let key of metaKeys">
 	<field [field]="meta.get(key)" [model]="model" [control]="formConfig[key]"></field>
 </div>

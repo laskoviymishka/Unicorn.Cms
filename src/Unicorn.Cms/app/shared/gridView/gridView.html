@@ -1,0 +1,15 @@
+
+<table class="table">
+	<thead>
+		<tr>
+			<th *ngFor="let column of provider?.meta">{{column.label}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let row of provider?.query()">
+			<td *ngFor="let column of provider?.keys">
+				{{row[column]}}
+			</td>
+		</tr>
+	</tbody>
+</table>

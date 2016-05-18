@@ -1,1 +1,1 @@
-﻿export * from './dynamicForm';
+﻿export * from './bmdBootDirective';

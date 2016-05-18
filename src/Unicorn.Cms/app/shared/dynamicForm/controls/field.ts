@@ -12,8 +12,5 @@ import { DropdownField } from './dropdownField';
 })
 export class Field extends BaseField implements ng.OnInit {
   ngOnInit(): void {
-    console.log(this.field);
-    console.log(this.model);
-    console.log(this.control);
   }
 }
