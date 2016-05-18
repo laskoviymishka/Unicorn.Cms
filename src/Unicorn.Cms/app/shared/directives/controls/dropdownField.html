@@ -1,1 +1,15 @@
-<p> drop down</p>
+<div class="form-group" [ngClass]="{'has-success': control.dirty && control.valid, 'has-danger': control.dirty && !control.valid}">
+	<label [attr.for]="field.label" class="mdb-label-floating">{{field.label}}</label>
+	<div class="btn-group" bmdBoot>
+		<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Action
+		</button>
+		<div class="dropdown-menu">
+			<a class="dropdown-item" href="#">Action</a>
+			<a class="dropdown-item" href="#">Another action</a>
+			<a class="dropdown-item" href="#">Something else here</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="#">Separated link</a>
+		</div>
+	</div>
+</div>
