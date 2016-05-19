@@ -3,20 +3,23 @@ import * as http from '@angular/http';
 import { RestService } from '../../shared/services';
 import * as domain from '../../shared/domain';
 import * as directives from '../../shared/directives';
-import * as gridView from '../../shared/gridView';
+import * as grid from '../../shared/gridView';
 
 @ng.Component({
   selector: 'category',
   template: require('./category.html'),
-  directives: [gridView.GridView]
+  directives: [grid.GridView],
+  providers: [grid.MetadataProviderFactory]
 })
 export class Category implements ng.OnInit {
-  private provider: gridView.DataProvider<domain.Category>;
-  constructor(private _http: http.Http) {
-    this.provider = new gridView.DataProvider<domain.Category>(domain.Category);
+  private options: grid.GridViewOptions;
+  constructor(private _providerFactory: grid.MetadataProviderFactory) {
+    this.options = new grid.GridViewOptions();
+    this.options.provider = _providerFactory.create<domain.Category>(domain.Category);
+    this.options.columns = ['name', 'parentId', new grid.SelectColumn(() => { console.log('sadasd'); })];
   }
 
   ngOnInit(): void {
-    this._http.get('/api/categories').subscribe(t => t.json());
+    //this._http.get('/api/categories').subscribe(t => t.json());
   }
 }

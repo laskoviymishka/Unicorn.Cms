@@ -1,15 +1,10 @@
-
 <table class="table">
 	<thead>
 		<tr>
-			<th *ngFor="let column of provider?.meta">{{column.label}}</th>
+			<th *ngFor="let column of options?.columns">{{column.label}}</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let row of provider?.query()">
-			<td *ngFor="let column of provider?.keys">
-				{{row[column]}}
-			</td>
-		</tr>
+		<tr *ngFor="let row of options?.provider?.query()" grid-row [columns]="options.columns" [row]="row"></tr>
 	</tbody>
 </table>

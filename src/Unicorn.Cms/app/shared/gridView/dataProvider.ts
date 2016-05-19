@@ -1,4 +1,4 @@
-﻿import { getMeta, IMetadata } from '../domain';
+﻿import { getMeta, IMetadata, Category } from '../domain';
 import * as Rx from 'rxjs';
 import * as ng from '@angular/core';
 
@@ -8,23 +8,7 @@ export class DataProvider<T> {
   constructor(public model: Function) { }
 
   query(): any[] {
-    return [
-      {
-        id: 1,
-        name: 'test',
-        parentId: 1
-      },
-      {
-        id: 1,
-        name: 'test',
-        parentId: 1
-      },
-      {
-        id: 1,
-        name: 'test',
-        parentId: 1
-      }
-    ];
+    return [Category.random(), Category.random(), Category.random()];
   }
 
   get meta(): IMetadata[] {

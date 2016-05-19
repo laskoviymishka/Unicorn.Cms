@@ -21,7 +21,7 @@ export function key(target: any, key: string) {
 
 export const foreignKey = (targetType: Function) => {
   return (target: Object, propertyKey: string | symbol): void => {
-    addMeta(targetType, propertyKey, 'foreignKey', targetType);
+    addMeta(target, propertyKey, 'foreignKey', targetType);
   };
 };
 
@@ -51,7 +51,9 @@ export function addMeta(target: any, propertyKey: string | symbol, metaKey: stri
     }
 
     if (!target[METADATA][propertyKey]) {
-      target[METADATA][propertyKey] = {};
+      target[METADATA][propertyKey] = {
+        objectKey: propertyKey
+      };
     }
 
     target[METADATA][propertyKey][metaKey] = metaValue;
@@ -59,7 +61,8 @@ export function addMeta(target: any, propertyKey: string | symbol, metaKey: stri
 }
 
 export interface IMetadata {
-  key: boolean;
+  objectKey: string;
+  isKey: boolean;
   label: string;
   type: EditorType;
   foreignKey: Function;

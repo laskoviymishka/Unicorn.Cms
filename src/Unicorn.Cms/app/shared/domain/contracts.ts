@@ -39,4 +39,12 @@ export class Category {
   public set parentId(value: number) {
     this._parentId = value;
   }
+
+  public static random(): Category {
+    let cat = new Category();
+    cat.id = 7;
+    cat.name = 'Some name';
+    cat.parentId = 2;
+    return cat;
+  }
 }

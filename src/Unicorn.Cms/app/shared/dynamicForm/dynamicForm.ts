@@ -26,5 +26,6 @@ export class DynamicForm implements ng.OnInit {
 
     this.form = this._fb.group(this.formConfig);
     this.meta = modelMeta;
+    console.log(this.meta);
   }
 }
