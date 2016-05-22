@@ -14,10 +14,9 @@ export abstract class Cell {
 
 @ng.Component({
   selector: 'cell',
-  template: 'select'
+  template: '<button [ngClass]="column.className" (click)="column.select(row, column)">select</button>'
 })
-export class SelectCellComponent extends Cell {
-}
+export class SelectCellComponent extends Cell { }
 
 @ng.Component({
   selector: 'cell',
@@ -29,7 +28,7 @@ export class TextCellComponent extends Cell {
       return this.row[this.column.meta.objectKey];
     }
 
-    return "___";
+    return "";
   }
 }
 
@@ -44,7 +43,7 @@ export class TextHeaderComponent {
 
 export class SelectColumn extends Column {
   constructor(
-    public selectCallback: Function,
+    public select: Function,
     public label: string = 'Select',
     public className: string = 'btn btn-primary') {
     super();

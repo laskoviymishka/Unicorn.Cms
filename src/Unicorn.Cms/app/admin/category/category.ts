@@ -16,7 +16,12 @@ export class Category implements ng.OnInit {
   constructor(private _providerFactory: grid.MetadataProviderFactory) {
     this.options = new grid.GridViewOptions();
     this.options.provider = _providerFactory.create<domain.Category>(domain.Category);
-    this.options.columns = ['name', 'parentId', new grid.SelectColumn(() => { console.log('sadasd'); })];
+    this.options.columns = [
+      'name',
+      'parentId',
+      new grid.SelectColumn((row, column) => {
+        console.log('sadasd', row, column);
+      })];
   }
 
   ngOnInit(): void {
