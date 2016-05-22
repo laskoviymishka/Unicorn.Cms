@@ -4,22 +4,33 @@ import { getMeta, IMetadata } from '../domain';
 export class Column {
   cell: ng.Type = TextCellComponent;
   header: ng.Type = TextHeaderComponent;
+  meta: any;
+}
+
+export abstract class Cell {
+  public column: Column;
+  public row: any;
 }
 
 @ng.Component({
   selector: 'cell',
   template: 'select'
 })
-export class SelectCellComponent {
-  constructor() { }
+export class SelectCellComponent extends Cell {
 }
 
 @ng.Component({
   selector: 'cell',
-  template: 'text'
+  template: '{{text()}}'
 })
-export class TextCellComponent {
-  constructor() { }
+export class TextCellComponent extends Cell {
+  text() {
+    if (this.row[this.column.meta.objectKey]) {
+      return this.row[this.column.meta.objectKey];
+    }
+
+    return "___";
+  }
 }
 
 @ng.Component({

@@ -1,74 +1,43 @@
-import {Component, ComponentRef, Input, ViewContainerRef, ComponentResolver, ViewChild} from '@angular/core'
+import * as ng from '@angular/core';
 import * as common from '@angular/common';
 import { getMeta, IMetadata } from '../domain';
 import { DataProvider } from './dataProvider';
 import { Column } from './columns';
-import { GridCell } from './gridCell';
 
-@Component({
-  selector: 'dcl-wrapper',
-  template: `<div #target></div>`
+@ng.Component({
+  selector: 'cell-wrapper',
+  template: `<div #container></div>`
 })
-export class DclWrapper {
-  @ViewChild('target', { read: ViewContainerRef }) target;
-  @Input() type;
-  cmpRef: ComponentRef<any>;
-  private isViewInitialized: boolean = false;
+export class CellWrapperComponent {
+  @ng.ViewChild('container', { read: ng.ViewContainerRef }) container: ng.ViewContainerRef;
+  @ng.Input('column') private column: Column;
+  @ng.Input('row') private row: any;
 
-  constructor(private resolver: ComponentResolver) { }
-
-  updateComponent() {
-    if (!this.isViewInitialized) {
-      return;
-    }
-    if (this.cmpRef) {
-      this.cmpRef.destroy();
-    }
-    //    this.dcl.loadNextToLocation(this.type, this.target).then((cmpRef) => {
-    this.resolver.resolveComponent(this.type).then((factory) => {
-      this.cmpRef = this.target.createComponent(factory);
-      console.log(this.cmpRef);
-    });
+  constructor(
+    private cr: ng.ComponentResolver,
+    private loader: ng.DynamicComponentLoader,
+    private elementRef: ng.ElementRef,
+    private injector: ng.Injector) {
   }
 
-  ngOnChanges() {
-    this.updateComponent();
-  }
-
-  ngAfterViewInit() {
-    this.isViewInitialized = true;
-    this.updateComponent();
-  }
-
-  ngOnDestroy() {
-    if (this.cmpRef) {
-      this.cmpRef.destroy();
-    }
-  }
-
-  ngOnInit(): void {
-    console.log(this.target);
+  ngAfterViewInit(): void {
+    console.log(this.column, this.container);
+    this.loader.loadNextToLocation(this.column.cell, this.container)
+      .then(ref => {
+        ref.instance.column = this.column;
+        ref.instance.row = this.row;
+        console.log(ref.instance);
+      });
   }
 }
 
-@Component({
-  selector: 'c3',
-  template: `<h2>c3</h2>`
-})
-export class C3 {
-}
-
-@Component({
+@ng.Component({
   selector: 'tr[grid-row]',
   template: require('./gridRow.html'),
-  directives: [DclWrapper, GridCell]
+  directives: [CellWrapperComponent]
 })
 export class GridRow {
-  constructor() {
-    
-  }
-  private type = C3;
-  @Input('columns') private columns: Column[];
-  @Input('row') private row: any;
+  @ng.Input('columns') private columns: Column[];
+  @ng.Input('row') private row: any;
 }
 

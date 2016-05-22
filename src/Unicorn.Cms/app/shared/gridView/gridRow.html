@@ -1,2 +1,3 @@
-<td *ngFor="let column of columns" grid-cell [row]="row" [column]="column">
+<td *ngFor="let column of columns">
+	<cell-wrapper [column]="column" [row]="row"></cell-wrapper>
 </td>

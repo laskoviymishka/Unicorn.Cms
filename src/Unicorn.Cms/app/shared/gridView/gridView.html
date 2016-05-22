@@ -7,6 +7,6 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor="let row of options?.provider?.query()" grid-row [columns]="options.columns" [row]="row"></tr>
+		<tr *ngFor="let row of data" grid-row [columns]="options?.columns" [row]="row"></tr>
 	</tbody>
 </table>

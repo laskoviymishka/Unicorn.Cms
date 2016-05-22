@@ -7,7 +7,7 @@ export class DataProvider<T> {
   private _keys: string[];
   constructor(public model: Function) { }
 
-  query(): any[] {
+  get data(): any[] {
     return [Category.random(), Category.random(), Category.random()];
   }
 

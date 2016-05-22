@@ -1,6 +1,6 @@
 import * as ng from '@angular/core';
 import * as common from '@angular/common';
-import { getMeta, IMetadata } from '../domain';
+import { getMeta, IMetadata, Category } from '../domain';
 import { DataProvider } from './dataProvider';
 import { GridRow } from './gridRow';
 import { Column, StringColumn } from './columns';
@@ -34,6 +34,7 @@ class HeaderWrapper {
   directives: [GridRow, HeaderWrapper]
 })
 export class GridView implements ng.OnInit {
+  data: Category[] = [Category.random(), Category.random(), Category.random()];
   @ng.Input('options') private options: GridViewOptions;
   ngOnInit(): void {
     console.log(this.options);
