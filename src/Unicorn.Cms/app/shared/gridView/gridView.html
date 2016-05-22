@@ -1,7 +1,9 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th *ngFor="let column of options?.columns">{{column.label}}</th>
+			<th *ngFor="let column of options?.columns">
+				<header-wrapper [column]="column"></header-wrapper>
+			</th>
 		</tr>
 	</thead>
 	<tbody>

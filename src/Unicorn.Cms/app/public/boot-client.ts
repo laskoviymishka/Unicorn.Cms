@@ -1,6 +1,5 @@
 import 'bootstrap';
 require('zone.js');
-import 'reflect-metadata';
 import '../styles/site.css';
 
 

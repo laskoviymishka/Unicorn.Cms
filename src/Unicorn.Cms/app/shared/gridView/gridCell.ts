@@ -8,40 +8,19 @@ import { Column, TextCellComponent } from './columns';
   selector: 'td[grid-cell]',
   template: require('./gridCell.html')
 })
-export class GridCell implements ng.OnInit {
-  @ng.ViewChild('target', { read: ng.ViewContainerRef }) target: ng.ViewContainerRef;
+export class GridCell {
+  @ng.ViewChild('cell', { read: ng.ViewContainerRef }) cell: ng.ViewContainerRef;
   @ng.Input('column') private column: Column;
   @ng.Input('row') private row: any;
   cmpRef: ng.ComponentRef<any>;
   private isViewInitialized: boolean = false;
   private counter: number = 0;
 
-  constructor(private resolver: ng.ComponentResolver, private dcl: ng.DynamicComponentLoader) { }
-
-  updateComponent() {
-    if (!this.isViewInitialized) {
-      return;
-    }
-    if (this.cmpRef) {
-      this.cmpRef.destroy();
-    }
-
-    //this.dcl.loadNextToLocation(this.column.cellComponent, this.target).then((cmpRef) => {
-    this.resolver.resolveComponent(this.column.cellComponent).then((factory: ng.ComponentFactory<any>) => {
-    //  //this.cmpRef = this.target.createComponent(factory)
-      console.log('cmpRef' + this.counter, factory);
-      this.counter++;
-    });
-  }
-
-  ngOnChanges() {
-    this.updateComponent();
-  }
-
-  ngAfterViewInit() {
-    this.isViewInitialized = true;
-    this.updateComponent();
-  }
+  constructor(
+    private cr: ng.ComponentResolver,
+    private dcl: ng.DynamicComponentLoader,
+    private injector: ng.Injector,
+    private vcr: ng.ViewContainerRef) { }
 
   ngOnDestroy() {
     if (this.cmpRef) {
@@ -49,7 +28,19 @@ export class GridCell implements ng.OnInit {
     }
   }
 
-  ngOnInit(): void {
-    console.log('ngOnInit', this.target);
+  ngAfterViewInit(): void {
+    //console.log(this.counter++, this.cell);
+    //this.cr.resolveComponent(this.column.cellComponent).then(factory => {
+    //  //factory.selector = '#cell';
+    //  //factory.create(this.injector);
+    //  //console.log(factory);
+    //});
+    //this.dcl.loadNextToLocation(this.column.cellComponent, this.cell)
+    //  .then(ref => {
+    //    this.cmpRef = ref;
+    //    ref.instance.column = this.column;
+    //    ref.instance.row = this.row;
+    //    console.log(ref.instance);
+    //  });
   }
 }

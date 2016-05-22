@@ -2,22 +2,32 @@
 import { getMeta, IMetadata } from '../domain';
 
 export class Column {
-  cellComponent: ng.Type = TextCellComponent;
+  cell: ng.Type = TextCellComponent;
+  header: ng.Type = TextHeaderComponent;
 }
 
 @ng.Component({
-  selector: 'select-cell',
-  template: 'sadasdas'
+  selector: 'cell',
+  template: 'select'
 })
 export class SelectCellComponent {
   constructor() { }
 }
 
 @ng.Component({
-  selector: 'text-cell',
+  selector: 'cell',
   template: 'text'
 })
 export class TextCellComponent {
+  constructor() { }
+}
+
+@ng.Component({
+  selector: 'column-header',
+  template: '{{column.label}}'
+})
+export class TextHeaderComponent {
+  public column: Column;
   constructor() { }
 }
 
@@ -27,7 +37,7 @@ export class SelectColumn extends Column {
     public label: string = 'Select',
     public className: string = 'btn btn-primary') {
     super();
-    this.cellComponent = SelectCellComponent;
+    this.cell = SelectCellComponent;
   }
 }
 
@@ -37,6 +47,6 @@ export class StringColumn extends Column {
     public label: string = meta.label,
     public className: string = 'btn btn-primary') {
     super();
-    this.cellComponent = TextCellComponent;
+    this.cell = TextCellComponent;
   }
 }

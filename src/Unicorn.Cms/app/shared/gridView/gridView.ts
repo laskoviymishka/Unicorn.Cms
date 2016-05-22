@@ -6,9 +6,32 @@ import { GridRow } from './gridRow';
 import { Column, StringColumn } from './columns';
 
 @ng.Component({
+  selector: 'header-wrapper',
+  template: `<div #container></div>`
+})
+class HeaderWrapper {
+  @ng.ViewChild('container', { read: ng.ViewContainerRef }) container: ng.ViewContainerRef;
+  @ng.Input('column') private column: Column;
+
+  constructor(
+    private cr: ng.ComponentResolver,
+    private loader: ng.DynamicComponentLoader,
+    private elementRef: ng.ElementRef,
+    private injector: ng.Injector) {
+  }
+
+  ngAfterViewInit(): void {
+    this.loader.loadNextToLocation(this.column.header, this.container)
+      .then(ref => {
+        ref.instance.column = this.column;
+        console.log(ref.instance);
+      });
+  }
+}
+@ng.Component({
   selector: 'grid-view',
   template: require('./gridView.html'),
-  directives: [GridRow]
+  directives: [GridRow, HeaderWrapper]
 })
 export class GridView implements ng.OnInit {
   @ng.Input('options') private options: GridViewOptions;
@@ -48,5 +71,5 @@ export class GridView implements ng.OnInit {
 
 export class GridViewOptions {
   public provider: DataProvider<any>;
-  public columns: (Column| string)[];
+  public columns: (Column | string)[];
 }

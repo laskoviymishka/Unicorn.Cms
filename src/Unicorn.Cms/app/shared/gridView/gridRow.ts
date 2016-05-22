@@ -61,7 +61,7 @@ export class C3 {
 @Component({
   selector: 'tr[grid-row]',
   template: require('./gridRow.html'),
-  directives: [DclWrapper]
+  directives: [DclWrapper, GridCell]
 })
 export class GridRow {
   constructor() {
