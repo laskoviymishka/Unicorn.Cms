@@ -26,7 +26,6 @@ export class CellWrapperComponent {
       .then(ref => {
         ref.instance.column = this.column;
         ref.instance.row = this.row;
-        console.log(ref.instance);
       });
   }
 }

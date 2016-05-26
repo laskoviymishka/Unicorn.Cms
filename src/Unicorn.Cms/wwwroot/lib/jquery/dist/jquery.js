@@ -2772,7 +2772,7 @@ var rootjQuery,
 							if ( jQuery.isFunction( this[ match ] ) ) {
 								this[ match ]( context[ match ] );
 
-							// ...and otherwise set as attributes
+							// ..And otherwise set as attributes
 							} else {
 								this.attr( match, context[ match ] );
 							}

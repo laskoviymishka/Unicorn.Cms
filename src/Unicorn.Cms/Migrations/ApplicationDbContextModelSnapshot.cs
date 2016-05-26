@@ -1,8 +1,8 @@
-using System;
-using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Infrastructure;
-using Microsoft.Data.Entity.Metadata;
-using Microsoft.Data.Entity.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Unicorn.Cms.Models;
 
 namespace Unicorn.Cms.Migrations
@@ -13,10 +13,10 @@ namespace Unicorn.Cms.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
+                .HasAnnotation("ProductVersion", "1.0.0-rc2-20896")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
                 {
                     b.Property<string>("Id");
 
@@ -32,12 +32,12 @@ namespace Unicorn.Cms.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
-                        .HasAnnotation("Relational:Name", "RoleNameIndex");
+                        .HasName("RoleNameIndex");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetRoles");
+                    b.ToTable("IdentityRole");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -51,10 +51,12 @@ namespace Unicorn.Cms.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetRoleClaims");
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("IdentityRoleClaim<string>");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -68,10 +70,12 @@ namespace Unicorn.Cms.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetUserClaims");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("IdentityUserClaim<string>");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider");
 
@@ -84,10 +88,12 @@ namespace Unicorn.Cms.Migrations
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetUserLogins");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("IdentityUserLogin<string>");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId");
 
@@ -95,10 +101,29 @@ namespace Unicorn.Cms.Migrations
 
                     b.HasKey("UserId", "RoleId");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetUserRoles");
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("IdentityUserRole<string>");
                 });
 
-            modelBuilder.Entity("Unicorn.Cms.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("IdentityUserToken<string>");
+                });
+
+            modelBuilder.Entity("Unicorn.Cms.Models.Domain.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
 
@@ -138,12 +163,12 @@ namespace Unicorn.Cms.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasAnnotation("Relational:Name", "EmailIndex");
+                        .HasName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
-                        .HasAnnotation("Relational:Name", "UserNameIndex");
+                        .HasName("UserNameIndex");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetUsers");
+                    b.ToTable("ApplicationUser");
                 });
 
             modelBuilder.Entity("Unicorn.Cms.Models.Domain.Category", b =>
@@ -158,6 +183,10 @@ namespace Unicorn.Cms.Migrations
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("Unicorn.Cms.Models.Domain.Comment", b =>
@@ -174,6 +203,12 @@ namespace Unicorn.Cms.Migrations
                     b.Property<DateTime>("TimeStamp");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.ToTable("Comment");
                 });
 
             modelBuilder.Entity("Unicorn.Cms.Models.Domain.Content", b =>
@@ -188,9 +223,11 @@ namespace Unicorn.Cms.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAnnotation("Relational:DiscriminatorProperty", "Discriminator");
+                    b.HasIndex("AuthorId");
 
-                    b.HasAnnotation("Relational:DiscriminatorValue", "Content");
+                    b.ToTable("Content");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Content");
                 });
 
             modelBuilder.Entity("Unicorn.Cms.Models.Domain.Media", b =>
@@ -203,6 +240,8 @@ namespace Unicorn.Cms.Migrations
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
+
+                    b.ToTable("Media");
                 });
 
             modelBuilder.Entity("Unicorn.Cms.Models.Domain.Post", b =>
@@ -221,6 +260,14 @@ namespace Unicorn.Cms.Migrations
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ContentId");
+
+                    b.ToTable("Post");
                 });
 
             modelBuilder.Entity("Unicorn.Cms.Models.Domain.Tag", b =>
@@ -233,6 +280,10 @@ namespace Unicorn.Cms.Migrations
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.ToTable("Tag");
                 });
 
             modelBuilder.Entity("Unicorn.Cms.Models.Domain.BlogPost", b =>
@@ -241,39 +292,46 @@ namespace Unicorn.Cms.Migrations
 
                     b.Property<string>("Content");
 
-                    b.HasAnnotation("Relational:DiscriminatorValue", "BlogPost");
+                    b.ToTable("BlogPost");
+
+                    b.HasDiscriminator().HasValue("BlogPost");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
+                    b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
                         .WithMany()
-                        .HasForeignKey("RoleId");
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Unicorn.Cms.Models.ApplicationUser")
+                    b.HasOne("Unicorn.Cms.Models.Domain.ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Unicorn.Cms.Models.ApplicationUser")
+                    b.HasOne("Unicorn.Cms.Models.Domain.ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
+                    b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
                         .WithMany()
-                        .HasForeignKey("RoleId");
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Unicorn.Cms.Models.ApplicationUser")
+                    b.HasOne("Unicorn.Cms.Models.Domain.ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Unicorn.Cms.Models.Domain.Category", b =>
@@ -285,7 +343,7 @@ namespace Unicorn.Cms.Migrations
 
             modelBuilder.Entity("Unicorn.Cms.Models.Domain.Comment", b =>
                 {
-                    b.HasOne("Unicorn.Cms.Models.ApplicationUser")
+                    b.HasOne("Unicorn.Cms.Models.Domain.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("AuthorId");
 
@@ -296,20 +354,21 @@ namespace Unicorn.Cms.Migrations
 
             modelBuilder.Entity("Unicorn.Cms.Models.Domain.Content", b =>
                 {
-                    b.HasOne("Unicorn.Cms.Models.ApplicationUser")
+                    b.HasOne("Unicorn.Cms.Models.Domain.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("AuthorId");
                 });
 
             modelBuilder.Entity("Unicorn.Cms.Models.Domain.Post", b =>
                 {
-                    b.HasOne("Unicorn.Cms.Models.ApplicationUser")
+                    b.HasOne("Unicorn.Cms.Models.Domain.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("AuthorId");
 
                     b.HasOne("Unicorn.Cms.Models.Domain.Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Unicorn.Cms.Models.Domain.Content")
                         .WithMany()
@@ -321,10 +380,6 @@ namespace Unicorn.Cms.Migrations
                     b.HasOne("Unicorn.Cms.Models.Domain.BlogPost")
                         .WithMany()
                         .HasForeignKey("BlogPostId");
-                });
-
-            modelBuilder.Entity("Unicorn.Cms.Models.Domain.BlogPost", b =>
-                {
                 });
         }
     }

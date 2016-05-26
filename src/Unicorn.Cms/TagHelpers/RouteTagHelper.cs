@@ -1,22 +1,22 @@
-﻿using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Infrastructure;
-using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.AspNet.Mvc.TagHelpers;
-using Microsoft.AspNet.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Unicorn.Cms.TagHelpers
 {
-	[HtmlTargetElement("a", Attributes = RouteTagAttributeName)]
+    using Microsoft.AspNetCore.Mvc.Routing;
+
+    [HtmlTargetElement("a", Attributes = RouteTagAttributeName)]
 	public class RouteTagHelper : TagHelper
 	{
 		private const string RouteTagAttributeName = "highlight-active";
-		private IActionContextAccessor actionContextAccessor;
 		private IUrlHelper urlHelper;
 
-		public RouteTagHelper(IActionContextAccessor actionContextAccessor, IUrlHelper urlHelper)
+		public RouteTagHelper(IUrlHelperFactory urlHelperFactory, IActionContextAccessor actionContextAccessor)
 		{
-			this.actionContextAccessor = actionContextAccessor;
-			this.urlHelper = urlHelper;
+			this.urlHelper = urlHelperFactory.GetUrlHelper(actionContextAccessor.ActionContext);
 		}
 
 		//Optional attribute. If not defined, "active" class will be used

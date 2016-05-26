@@ -1,9 +1,12 @@
 ﻿@using System.Security.Claims
+@using System.Security.Principal
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
-@if (User.IsSignedIn())
+@if (User.Identity.IsAuthenticated)
 {
 	<form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="form-inline pull-xs-right">
-		<a class="btn btn btn-outline-success" asp-controller="Manage" asp-action="Index" title="Manage">Hello @User.GetUserName()!</a>
+		<a class="btn btn btn-outline-success" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
 		<button type="submit" class="btn btn btn-outline-warn">Log off</button>
 	</form>
 }

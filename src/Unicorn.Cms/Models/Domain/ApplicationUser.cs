@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-
-namespace Unicorn.Cms.Models.Domain
+﻿namespace Unicorn.Cms.Models.Domain
 {
-	public class ApplicationUser : IdentityUser, IEntity<string>
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+    public class ApplicationUser : IdentityUser, IEntity<string>
 	{
 	}
 }

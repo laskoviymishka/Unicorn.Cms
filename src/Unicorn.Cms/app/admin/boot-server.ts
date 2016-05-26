@@ -7,7 +7,7 @@ import { BASE_URL, ORIGIN_URL, REQUEST_URL } from 'angular2-universal/common';
 import { App, routes } from './app';
 import { provideRouter } from '@ngrx/router';
 
-export default function (params: aspnet.BootFuncParams): Promise<{ html: string, globals?: any }> {
+export default function (params: .AspNetCore.BootFuncParams): Promise<{ html: string, globals?: any }> {
   const serverBindings = [
     ngCore.provide(BASE_URL, { useValue: '/' }),
     ngCore.provide(ORIGIN_URL, { useValue: params.origin }),

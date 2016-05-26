@@ -7,7 +7,7 @@ import { DataProvider } from './dataProvider';
 export class MetadataProviderFactory {
   constructor(private _http: http.Http) {
     console.log('MetadataProviderFactory');
-  };
+  }
 
   public create<T>(model: Function): DataProvider<T> {
     return new DataProvider<T>(model);

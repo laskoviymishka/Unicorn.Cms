@@ -1,9 +1,9 @@
 import * as ng from '@angular/core';
 import * as common from '@angular/common';
-import { getMeta, IMetadata, Category } from '../domain';
 import { DataProvider } from './dataProvider';
 import { GridRow } from './gridRow';
 import { Column, StringColumn } from './columns';
+import {Category} from "../domain/contracts";
 
 @ng.Component({
   selector: 'header-wrapper',

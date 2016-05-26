@@ -1,7 +1,7 @@
 ﻿import * as ng from '@angular/core';
-import { getMeta, IMetadata } from '../domain';
+import {IMetadata as Metadata} from "../domain/decorators";
 
-export class Column {
+export abstract class Column {
   cell: ng.Type = TextCellComponent;
   header: ng.Type = TextHeaderComponent;
   meta: any;
@@ -12,9 +12,13 @@ export abstract class Cell {
   public row: any;
 }
 
+export abstract class Header {
+  public column: Column;
+}
+
 @ng.Component({
   selector: 'cell',
-  template: '<button [ngClass]="column.className" (click)="column.select(row, column)">select</button>'
+  template: '<button [ngClass]="column.className" (click)="column.select(row, column)">{{column.label}}</button>'
 })
 export class SelectCellComponent extends Cell { }
 
@@ -23,7 +27,7 @@ export class SelectCellComponent extends Cell { }
   template: '{{text()}}'
 })
 export class TextCellComponent extends Cell {
-  text() {
+  text(): string {
     if (this.row[this.column.meta.objectKey]) {
       return this.row[this.column.meta.objectKey];
     }
@@ -36,9 +40,7 @@ export class TextCellComponent extends Cell {
   selector: 'column-header',
   template: '{{column.label}}'
 })
-export class TextHeaderComponent {
-  public column: Column;
-  constructor() { }
+export class TextHeaderComponent extends Header {
 }
 
 export class SelectColumn extends Column {
@@ -53,7 +55,7 @@ export class SelectColumn extends Column {
 
 export class StringColumn extends Column {
   constructor(
-    public meta: IMetadata,
+    public meta: Metadata,
     public label: string = meta.label,
     public className: string = 'btn btn-primary') {
     super();

@@ -1,17 +1,19 @@
-﻿import { getMeta, IMetadata, Category } from '../domain';
-import * as Rx from 'rxjs';
+﻿import * as Rx from 'rxjs';
 import * as ng from '@angular/core';
+import {IMetadata as Metadata, getMeta } from "../domain/decorators";
+import {Category} from "../domain/contracts";
 
 export class DataProvider<T> {
-  private _meta: IMetadata[];
+  private _meta: Metadata[];
   private _keys: string[];
+
   constructor(public model: Function) { }
 
   get data(): any[] {
     return [Category.random(), Category.random(), Category.random()];
   }
 
-  get meta(): IMetadata[] {
+  get meta(): Metadata[] {
     if (!this._meta) {
       this._meta = [];
       getMeta(this.model.prototype).forEach((value, key) => this._meta.push(value));
