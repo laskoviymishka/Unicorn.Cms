@@ -23,6 +23,7 @@ namespace Unicorn.Cms
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
+    using Microsoft.AspNetCore.NodeServices;
     using Microsoft.EntityFrameworkCore;
 
     public class Startup
@@ -63,6 +64,11 @@ namespace Unicorn.Cms
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
+
+            services.AddNodeServices(new NodeServicesOptions
+            {
+                HostingModel = NodeHostingModel.Http
             });
 
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();

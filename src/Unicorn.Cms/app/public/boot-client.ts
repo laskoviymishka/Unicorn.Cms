@@ -1,4 +1,6 @@
 import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+
 require('zone.js');
 import '../styles/site.css';
 
