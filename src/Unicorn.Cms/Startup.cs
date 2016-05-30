@@ -117,6 +117,11 @@ namespace Unicorn.Cms
                     template: "{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapSpaFallbackRoute(
+                    name: "ducttape-spa-fallback",
+                    templatePrefix: "Home/Duct-tape",
+                    defaults: new { controller = "Home", action = "Ducttape" });
+
+                routes.MapSpaFallbackRoute(
                     name: "admin-spa-fallback",
                     templatePrefix: "Home/Admin",
                     defaults: new { controller = "Home", action = "Admin" });

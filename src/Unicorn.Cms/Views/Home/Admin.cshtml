@@ -3,8 +3,8 @@
 	ViewBag.Base = "/Home/Admin";
 }
 
-@*<app asp-prerender-module="app/admin/boot-server" asp-prerender-webpack-config="webpack.config.js">Loading...</app>*@
-<app>Loading...</app>
+<app asp-prerender-module="app/admin/boot-server"
+	 asp-prerender-webpack-config="webpack.config.js">Loading...</app>
 @section scripts {
 	<script src="~/dist/admin.js" asp-append-version="true"></script>
 }
