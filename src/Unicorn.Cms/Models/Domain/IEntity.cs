@@ -6,5 +6,4 @@ namespace Unicorn.Cms.Models.Domain
 	{
 		TKey Id { get; set; }
 	}
-
 }
