@@ -4,6 +4,7 @@
 /// <reference path="../webpack.config.js" />
 /// <reference path="../webpack.config.prod.js" />
 /// <reference path="dist/admin.js" />
+/// <reference path="dist/ducttape.js" />
 /// <reference path="dist/main.js" />
 /// <reference path="js/site.js" />
 /// <reference path="lib/bootstrap/dist/js/bootstrap.js" />
